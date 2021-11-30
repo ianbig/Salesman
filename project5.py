@@ -3,8 +3,8 @@ Math 560
 Project 5
 Fall 2021
 
-Partner 1:
-Partner 2:
+Partner 1: Ian Liu (cl583)
+Partner 2: Leo Han (nh185)
 Date:
 """
 
@@ -31,7 +31,7 @@ def prim(adjList, adjMat):
         v = Q.deleteMin()
         v.visited = True
 
-        for neigh in v.neigh:
+        for neigh in v.neigh: #look for weight of edges and update the value if the node is not visited
             if not neigh.visited:
                 if neigh.cost > adjMat[v.rank][neigh.rank]:
                     neigh.cost = adjMat[v.rank][neigh.rank]
@@ -52,7 +52,7 @@ def kruskal(adjList, edgeList):
     X = []
     for e in edgeList:
         v1, v2 = e.vertices
-        if find(v1).isEqual(find(v2)) == False:
+        if find(v1).isEqual(find(v2)) == False:  
             X.append(e)
             union(v1, v2)
     return X
@@ -82,7 +82,7 @@ find: this function will return the root of the set that contains v.
 Note: we will use path compression here.
 
 """
-def find(v):
+def find(v): # use path compression to find node
     ##### Your implementation goes here. #####
     if v != v.pi:
         v.pi = find(v.pi)
@@ -91,7 +91,7 @@ def find(v):
 """
 union: this function will union the sets of vertices v and u.
 """
-def union(u,v):
+def union(u,v): # union the set every time we connect two nodes
     ##### Your implementation goes here. #####
     ru = find(u)
     rv = find(v)
@@ -127,7 +127,7 @@ def tsp(adjList, start):
     while stack:
         v = stack.pop()
         tour.append(v.rank)
-        v.visited = True
+        v.visited = True # mark visited before appending the node
         for neigh in v.mstN:
             if not neigh.visited:
                 stack.append(neigh)
